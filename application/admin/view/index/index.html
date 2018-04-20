@@ -1,0 +1,135 @@
+{extend name="layout/base"}
+
+{block name="style"}
+<link rel="stylesheet" href="__CSS__/main.css" media="all" />
+{/block}
+
+{block name="header"}
+<!-- 顶部 -->
+<div class="layui-header header">
+    <div class="layui-main">
+        <a href="#" class="logo">ZzAdmin</a>
+        <a href="javascript:;" class="iconfont hideMenu icon-menu1"></a>
+        <!-- 搜索 -->
+        <div class="layui-form component">
+            <select name="modules" lay-verify="required" lay-search="">
+                <option value="">直接选择或搜索选择</option>
+                <option value="1">layer</option>
+                <option value="2">form</option>
+                <option value="3">layim</option>
+                <option value="4">element</option>
+                <option value="5">laytpl</option>
+                <option value="6">upload</option>
+                <option value="7">laydate</option>
+                <option value="8">laypage</option>
+                <option value="9">flow</option>
+                <option value="10">util</option>
+                <option value="11">code</option>
+                <option value="12">tree</option>
+                <option value="13">layedit</option>
+                <option value="14">nav</option>
+                <option value="15">tab</option>
+                <option value="16">table</option>
+                <option value="17">select</option>
+                <option value="18">checkbox</option>
+                <option value="19">switch</option>
+                <option value="20">radio</option>
+            </select>
+            <i class="layui-icon">&#xe615;</i>
+        </div>
+        <!-- 天气信息 -->
+        <div class="weather" pc>
+            <div id="tp-weather-widget"></div>
+            <script>(function(T,h,i,n,k,P,a,g,e){g=function(){P=h.createElement(i);a=h.getElementsByTagName(i)[0];P.src=k;P.charset="utf-8";P.async=1;a.parentNode.insertBefore(P,a)};T["ThinkPageWeatherWidgetObject"]=n;T[n]||(T[n]=function(){(T[n].q=T[n].q||[]).push(arguments)});T[n].l=+new Date();if(T.attachEvent){T.attachEvent("onload",g)}else{T.addEventListener("load",g,false)}}(window,document,"script","tpwidget","//widget.seniverse.com/widget/chameleon.js"))</script>
+            <script>tpwidget("init", {
+                "flavor": "slim",
+                "location": "WX4FBXXFKE4F",
+                "geolocation": "enabled",
+                "language": "auto",
+                "unit": "c",
+                "theme": "chameleon",
+                "container": "tp-weather-widget",
+                "bubble": "enabled",
+                "alarmType": "badge",
+                "color": "#FFFFFF",
+                "uid": "UA1783792E",
+                "hash": "18a5ec6972e651ade3ca463c2b97946b"
+            });
+            tpwidget("show");</script>
+        </div>
+        <!-- 顶部右侧菜单 -->
+        <ul class="layui-nav top_menu">
+            <li class="layui-nav-item showNotice" id="showNotice" pc>
+                <a href="javascript:;"><i class="iconfont icon-gonggao"></i><cite>系统公告</cite></a>
+            </li>
+            <li class="layui-nav-item" mobile>
+                <a href="javascript:;" class="mobileAddTab" data-url="page/user/changePwd.html"><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1"></i><cite>设置</cite></a>
+            </li>
+            <li class="layui-nav-item" mobile>
+                <a href="{:url('user/logout')}" class="signOut"><i class="iconfont icon-loginout"></i> 退出</a>
+            </li>
+            <li class="layui-nav-item lockcms" pc>
+                <a href="javascript:;"><i class="iconfont icon-lock1"></i><cite>锁屏</cite></a>
+            </li>
+            <li class="layui-nav-item" pc>
+                <a href="javascript:;">
+                    <img src="__IMG__/face.jpg" class="layui-circle" width="35" height="35">
+                    <cite>稚子网络</cite>
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:;" data-url="page/user/userInfo.html"><i class="iconfont icon-zhanghu" data-icon="icon-zhanghu"></i><cite>个人资料</cite></a></dd>
+                    <dd><a href="javascript:;" data-url="page/user/changePwd.html"><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1"></i><cite>修改密码</cite></a></dd>
+                    <dd><a href="javascript:;" class="changeSkin"><i class="iconfont icon-huanfu"></i><cite>更换皮肤</cite></a></dd>
+                    <dd><a href="{:url('user/logout')}" class="signOut"><i class="iconfont icon-loginout"></i><cite>退出</cite></a></dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+</div>
+{/block}
+
+{block name="side"}
+<div class="layui-side layui-bg-black kit-side">
+    <div class="layui-side-scroll">
+        <!-- 显示/隐藏菜单 -->
+        <div class="kit-side-fold"><i class="fa fa-navicon" aria-hidden="true"></i></div>
+        <ul class="layui-nav layui-nav-tree navBar" lay-filter="kitNavbar" kit-navbar></ul>
+    </div>
+</div>
+{/block}
+
+{block name="body"}
+<div class="layui-body layui-form">
+    <div class="layui-tab marg0" lay-filter="bodyTab" id="top_tabs_box">
+        <ul class="layui-tab-title top_tab" id="top_tabs">
+            <li class="layui-this" lay-id=""><i class="iconfont icon-computer"></i> <cite>后台首页</cite></li>
+        </ul>
+        <ul class="layui-nav closeBox">
+            <li class="layui-nav-item">
+                <a href="javascript:;"><i class="iconfont icon-caozuo"></i> 页面操作</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:;" class="refresh refreshThis"><i class="layui-icon">&#x1002;</i> 刷新当前</a></dd>
+                    <dd><a href="javascript:;" class="closePageOther"><i class="iconfont icon-prohibit"></i> 关闭其他</a></dd>
+                    <dd><a href="javascript:;" class="closePageAll"><i class="iconfont icon-guanbi"></i> 关闭全部</a></dd>
+                </dl>
+            </li>
+        </ul>
+        <div class="layui-tab-content clildFrame">
+            <div class="layui-tab-item layui-show">
+                <iframe src="{:url('main')}"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="footer"}
+<div class="layui-footer footer">
+    <p>copyright &copy; {:date('Y')} <a href="http://www.zzstudio.net" target="_blank">稚子网络工作室</a>  <a onclick="donation()" class="layui-btn layui-btn-danger layui-btn-xs">捐赠作者</a></p>
+</div>
+{/block}
+
+{block name="script"}
+<script type="text/javascript" src="__JS__/leftNav.js"></script>
+<script type="text/javascript" src="__JS__/index.js"></script>
+{/block}

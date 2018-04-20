@@ -1,0 +1,47 @@
+{extend name="layout/base"}
+
+{block name="style"}
+<link rel="stylesheet" href="__CSS__/news.css" media="all" />
+{/block}
+
+{block name="body"}
+<div class="childrenBody">
+    <blockquote class="layui-elem-quote news_search">
+        <div class="layui-inline">
+            <form action="{:url('index')}" class="layui-form" method="get">
+                <div class="layui-input-inline">
+                    <input type="text" name="q" placeholder="描述/钩子名称" class="layui-input layui-input-sm">
+                </div>
+                <button class="layui-btn layui-btn-sm" lay-submit lay-filter="search"><i class="layui-icon">&#xe615;</i>查询</button>
+            </form>
+        </div>
+        <div class="layui-inline">
+            <a href="{:url('add')}" class="layui-btn layui-btn-normal layui-btn-sm newsAdd_btn"><i class="layui-icon">&#xe654;</i>新建</a>
+        </div>
+        <div class="layui-inline">
+            <button class="layui-btn layui-btn-danger layui-btn-sm batchDel" lay-filter="deleting"><i class="layui-icon">&#xe640;</i>批量删除</button>
+        </div>
+    </blockquote>
+    <div class="layui-form news_list">
+        <table lay-data="{ url:'{:url()}', page:true, id:'table-list' }" class="layui-table" lay-even lay-filter="layui-table">
+            <thead>
+            <tr>
+                <th lay-data="{type:'checkbox'}"></th>
+                <th lay-data="{field:'id', width:80, sort: true}">ID</th>
+                <th lay-data="{field:'name', width:180, edit: 'text', sort: true}">名称</th>
+                <th lay-data="{field:'description', minWidth:180, edit: 'text'}">描述</th>
+                <th lay-data="{width:120, maxWidth:150, align: 'center', toolbar: '#operate-tools'}">操作</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+{/block}
+
+{block name="script"}
+<script type="text/html" id="operate-tools">
+    <a class="layui-btn layui-btn-xs layui-btn-primary" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+</script>
+<script type="text/javascript" src="__JS__/hooks.js"></script>
+{/block}

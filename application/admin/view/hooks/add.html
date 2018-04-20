@@ -1,0 +1,39 @@
+{extend name="layout/base"}
+
+{block name="style"}
+<link rel="stylesheet" href="__CSS__/form.css" media="all" />
+{/block}
+
+{block name="body"}
+<div class="childrenBody">
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>新建钩子</legend>
+    </fieldset>
+    <form class="layui-form" method="post">
+        <div class="layui-form-item">
+            <label class="layui-form-label">钩子名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="name" class="layui-input layui-width-lg" lay-verify="required" lay-verType="tips" placeholder="只能使用英文及下划线，且不可重复">
+                <div class="layui-form-mid layui-word-aux"><i class="fa fa-info-circle"></i>可用于 <code>hook('钩子名称')</code> 来执行钩子业务，插件会根据此名称生成钩子方法。</div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">描述</label>
+            <div class="layui-input-block">
+                <textarea name="description" placeholder="请输入钩子描述" class="layui-textarea layui-width-lg" lay-verType="tips"></textarea>
+                <div class="layui-form-mid layui-word-aux"><i class="fa fa-info-circle"></i>钩子的描述信息</div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="js-ajax-form">立即提交</button>
+                <button type="button" lay-filter="go-back" class="layui-btn layui-btn-primary">返回</button>
+            </div>
+        </div>
+    </form>
+</div>
+{/block}
+
+{block name="script"}
+<script type="text/javascript" src="__JS__/hooks.js"></script>
+{/block}

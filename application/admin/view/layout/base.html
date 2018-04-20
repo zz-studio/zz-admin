@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>zzstudio 后台管理模板</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" href="__STATIC__/plugin/layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="__CSS__/layui-reset.css" media="all" />
+    <link rel="stylesheet" href="__STATIC__/plugin/font-awesome/css/font-awesome.min.css" media="all" />
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_tnyc012u2rlwstt9.css" media="all" />
+    {block name="style"}{/block}
+    <script type="text/javascript" src="__STATIC__/plugin/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/plugin/layui/layui.all.js"></script>
+    <script type="text/javascript">
+        // js全局变量
+        window.core = {
+            baseUrl: "{:request()->root()}/",
+            route: ['{:request()->module()}', '{:request()->controller()}', '{:request()->action()}'],
+            tpl: {
+                root: '__ROOT__',
+                static: '__STATIC__',
+                img: '__IMG__',
+                js: '__JS__',
+                css: '__CSS__'
+            }
+        };
+        layui.config({
+            base : "__JS__/"
+        }).extend({
+            helper: 'helper'
+        });
+    </script>
+    <script type="text/javascript" src="__JS__/core.js"></script>
+    <script type="text/javascript" src="__JS__/init.js"></script>
+</head>
+<body class="main_body">
+    <div class="layui-layout layui-layout-admin">
+        {block name="header"}{/block}
+        {block name="side"}{/block}
+        {block name="body"}{/block}
+        {block name="footer"}{/block}
+    </div>
+</body>
+{block name="script"}{/block}
+</html>
