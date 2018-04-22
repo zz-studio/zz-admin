@@ -5,5 +5,17 @@
 {/block}
 
 {block name="body"}
-
+<div class="childrenBody">
+    <blockquote class="layui-elem-quote">
+        <p>本平台基于 ThinkPHP {$Think.version}、layui 2.2.6 开发，支持除 layim 外所有的 Layui 组件。</p>
+        <p>
+            项目地址：<a href="https://github.com/zz-studio/zz-admin.git" class="layui-btn layui-btn-danger layui-btn-xs" target="_blank">GitHub 下载</a>
+            <span style="color: #f00;">[注：本框架仅作为学习交流使用，切勿用于商业用途]</span>
+        </p>
+        <p>技术交流QQ群：<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=8e8381a2f253db84c9c92ec722a1799d8cabba6f305cf2be178e6507bf148ee7"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="Web开发兴趣小组" title="Web开发兴趣小组"></a>（加群时请注明来自本框架）</p>
+    </blockquote>
+    <div class="layui-row layui-col-space10">
+        {:hook('adminIndex')}
+    </div>
+</div>
 {/block}

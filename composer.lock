@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d3a41f6596c7348e34a439266758c834",
+    "content-hash": "9ee78a98967b88fe5fb656960582558b",
     "packages": [
         {
             "name": "topthink/framework",
-            "version": "v5.1.10",
+            "version": "v5.1.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/top-think/framework.git",
-                "reference": "66b546f7cac130712d1e08fe2620105228f4bd8a"
+                "reference": "3156528b80dfa004109dfbfdbeb770b376a13f01"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/top-think/framework/66b546f7cac130712d1e08fe2620105228f4bd8a.zip",
-                "reference": "66b546f7cac130712d1e08fe2620105228f4bd8a",
+                "url": "https://files.phpcomposer.com/files/top-think/framework/3156528b80dfa004109dfbfdbeb770b376a13f01.zip",
+                "reference": "3156528b80dfa004109dfbfdbeb770b376a13f01",
                 "shasum": ""
             },
             "require": {
@@ -55,7 +55,7 @@
                 "orm",
                 "thinkphp"
             ],
-            "time": "2018-04-16T05:33:00+00:00"
+            "time": "2018-04-19T10:12:09+00:00"
         },
         {
             "name": "topthink/think-installer",
@@ -97,12 +97,53 @@
                 }
             ],
             "time": "2017-05-27T06:58:09+00:00"
+        },
+        {
+            "name": "zz-studio/think-addons",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zz-studio/think-addons.git",
+                "reference": "46ce7154dee094b75346f84238bc8a03208f065c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/zz-studio/think-addons/46ce7154dee094b75346f84238bc8a03208f065c.zip",
+                "reference": "46ce7154dee094b75346f84238bc8a03208f065c",
+                "shasum": ""
+            },
+            "require": {
+                "topthink/framework": "5.1.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "think\\": "src/"
+                },
+                "files": [
+                    "src/helper.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "byron",
+                    "email": "xiaobo.sun@qq.com"
+                }
+            ],
+            "description": "The ThinkPHP5.1 Addons Package",
+            "time": "2018-04-19 07:12:25"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "zz-studio/think-addons": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

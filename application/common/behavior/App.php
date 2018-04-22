@@ -35,7 +35,7 @@ class App
     public function run($params)
     {
         // 当前版本
-        define('RISK_VERSION', '1.0.0 beta ('.date('Y-m-d H:i:s').')');
+        define('SYS_VERSION', '1.0.0 beta');
 
         // 读取数据库中的配置
         $config = Env::get('app_debug') ? [] : Cache::pull('DB_CONFIG_DATA');

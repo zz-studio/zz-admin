@@ -17,7 +17,8 @@
     ],
     "require": {
         "php": ">=5.6.0",
-        "topthink/framework": "5.1.*"
+        "topthink/framework": "5.1.*",
+        "zz-studio/think-addons": "dev-master"
     },
     "autoload": {
         "psr-4": {
@@ -25,7 +26,7 @@
         }
     },
     "extra": {
-        "think-path": "thinkphp"
+        "think-path": "core"
     },
     "config": {
         "preferred-install": "dist"

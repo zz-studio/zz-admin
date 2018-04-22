@@ -19,45 +19,58 @@
  * | Copyright (c) 2017 http://www.zzstudio.net All rights reserved.
  * +----------------------------------------------------------------------
  */
+namespace addons\systeminfo;
 
-namespace app\admin\controller;
+use think\Db;
+use think\Addons;
 
-use think\Controller;
-
-class Base extends Controller
+/**
+ * 系统环境信息插件
+ * @author byron sampson
+ */
+class Systeminfo extends Addons
 {
-    // 分页变量
-    protected $page = 0;
-    protected $limit = 10;
+    public $info = [
+        'name' => 'systeminfo',
+        'title' => '系统环境信息',
+        'description' => '用于显示一些服务器的信息',
+        'status' => 0,
+        'author' => 'byron sampson',
+        'version' => '0.1'
+    ];
 
     /**
-     * 构造方法
-     * @access public
+     * 插件安装方法
+     * @return bool
      */
-    public function __construct()
+    public function install()
     {
-        parent::__construct();
-        $this->page = input('page', 0);
-        $this->limit = input('limit', 10);
+        return true;
     }
 
     /**
-     * 返回 table 所需格式
-     * @param array $list
+     * 插件卸载方法
+     * @return bool
+     */
+    public function uninstall()
+    {
+        return true;
+    }
+
+    /**
+     * 实现的 adminIndex 钩子方法
+     * @param $param
      * @return mixed
+     * @throws \Exception
      */
-    protected function toTable($list = [])
+    public function adminIndex($param)
     {
-        if (is_object($list)) {
-            $list = $list->toArray();
+        $config = $this->getConfig();
+        $this->assign('addons_config', $config);
+        $this->assign('system_info_mysql', Db::query("select version() as v;"));
+        if ($config['display']) {
+            return $this->fetch('widget');
         }
-
-        $data = [
-            'code' => 0,
-            'msg' => 'ok',
-            'count' => isset($list['total']) ? $list['total'] : count($list)
-        ];
-
-        return json(array_merge($data, $list));
     }
+
 }

@@ -1,0 +1,37 @@
+<div class="layui-col-md6">
+	<div class="smart-widget">
+		<div class="smart-widget-header">
+			{$addons_config.title|default=lang('system info')}
+		</div>
+		<div class="smart-widget-inner">
+			<div class="smart-widget-body">
+				<table class="layui-table" width="100%">
+					<tr>
+						<th width="35%">系统版本</th>
+						<td>{$Think.SYS_VERSION}</td>
+					</tr>
+					<tr>
+						<th>操作系统</th>
+						<td>{$Think.const.PHP_OS}</td>
+					</tr>
+					<tr>
+						<th>ThinkPHP</th>
+						<td>{$Think.VERSION}</td>
+					</tr>
+					<tr>
+						<th>运行环境</th>
+						<td>{$_SERVER['SERVER_SOFTWARE']}</td>
+					</tr>
+					<tr>
+						<th>MySQL</th>
+						<td>{$system_info_mysql.0.v}</td>
+					</tr>
+					<tr>
+						<th>上传限制</th>
+						<td>{:ini_get('upload_max_filesize')}</td>
+					</tr>
+				</table>
+			</div>
+		</div><!-- ./smart-widget-inner -->
+	</div>
+</div>

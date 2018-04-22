@@ -25,3 +25,8 @@ Route::get('admin/hooks/add', 'admin/hooks/add');
 Route::post('admin/hooks/add', 'admin/hooks/add')->validate('app\common\validate\Hooks', 'add');
 Route::get('admin/hooks/edit', 'admin/hooks/edit')->validate(['id' => 'require|number']);
 Route::post('admin/hooks/edit', 'admin/hooks/edit')->model('id', 'app\common\model\Hooks')->validate('app\common\validate\Hooks', 'edit');
+
+// 系统插件验证
+Route::post('admin/addons/preview', 'admin/addons/preview')->mergeExtraVars()->validate('app\common\validate\Addons');
+Route::get('admin/addons/create', 'admin/addons/create');
+Route::post('admin/addons/create', 'admin/addons/create')->validate('app\common\validate\Addons');

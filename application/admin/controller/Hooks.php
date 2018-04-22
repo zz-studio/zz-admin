@@ -30,7 +30,12 @@ class Hooks extends Base
     public function index()
     {
         if ($this->request->isAjax()) {
-            $list = model('Hooks')->paginate($this->limit);
+            $q = input('q', '');
+            $map = [];
+            if ($q) {
+                $map[] = ['name|description', 'like', "%{$q}%"];
+            }
+            $list = model('Hooks')->where($map)->paginate($this->limit);
             return $this->toTable($list);
         }
         return $this->fetch();
@@ -70,8 +75,9 @@ class Hooks extends Base
             if (false == $ret) {
                 $this->error('创建失败');
             }
-            $this->success('创建成功');
+            $this->success('创建成功', cookie('__forward__'));
         }
+        cookie('__forward__', $this->request->referer());
         return $this->fetch();
     }
 
@@ -87,10 +93,11 @@ class Hooks extends Base
             if (false == $ret) {
                 $this->error('保存失败');
             }
-            $this->success('保存成功');
+            $this->success('保存成功', cookie('__forward__'));
         }
         $id = input('get.id/d', 0);
         $this->assign('info', model('Hooks')->get($id));
+        cookie('__forward__', $this->request->referer());
         return $this->fetch();
     }
 

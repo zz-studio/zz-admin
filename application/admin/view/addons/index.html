@@ -1,60 +1,111 @@
 {extend name="layout/base"}
 
 {block name="style"}
-<link rel="stylesheet" href="__CSS__/news.css" media="all" />
+<style type="text/css">
+    .layui-elem-quote .layui-form-mid{
+        line-height: 12px;
+    }
+</style>
 {/block}
 
 {block name="body"}
 <div class="childrenBody">
-    <blockquote class="layui-elem-quote news_search">
-        <div class="layui-inline">
-            <div class="layui-input-inline">
-                <input type="text" value="" placeholder="请输入关键字" class="layui-input search_input">
+    <div class="layui-tab switch-table" lay-filter="tab-list">
+        <ul class="layui-tab-title">
+            <li class="layui-this" lay-event="installed">已安装的插件</li>
+            <li lay-event="uninstalled">未安装的插件<span class="layui-badge-dot"></span></li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <blockquote class="layui-elem-quote">
+                    <div class="layui-inline">
+                        <form action="{:url('index')}" class="layui-form" method="get">
+                            <div class="layui-input-inline">
+                                <input type="text" name="q" placeholder="插件名称/目录" class="layui-input layui-input-sm">
+                            </div>
+                            <button class="layui-btn layui-btn-sm" data-table="installed-list" lay-submit lay-filter="search"><i class="layui-icon">&#xe615;</i>查询</button>
+                        </form>
+                    </div>
+                    <div class="layui-inline">
+                        <a href="{:url('create')}" class="layui-btn layui-btn-danger layui-btn-sm">快速创建插件</a>
+                    </div>
+                    <div class="layui-inline">
+                        <div class="layui-form-mid" style="color: red">注意：如果需要后台管理插件，请务必将 addons.php 中的 autoload 设置为 false</div>
+                    </div>
+                </blockquote>
+                <div class="layui-form">
+                    <table lay-data="{ url:'{:url()}', page:true, id:'installed-list' }" class="layui-table" lay-even lay-filter="installed-table">
+                        <thead>
+                        <tr>
+                            <th lay-data="{field:'id', width:50, sort: true}">ID</th>
+                            <th lay-data="{field:'title', minWidth:180, sort: true}">插件名称</th>
+                            <th lay-data="{field:'name', minWidth:180, sort: true}">插件目录</th>
+                            <th lay-data="{field:'version', width:90, sort: true}">版本号</th>
+                            <th lay-data="{field:'author', width:120, sort: true}">作者</th>
+                            <th lay-data="{field:'install_time', width:165, sort: true}">安装时间</th>
+                            <th lay-data="{field:'status_text', width:90}">状态</th>
+                            <th lay-data="{width:195, maxWidth:150, align: 'center', toolbar: '#installed-tools'}">操作</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
             </div>
-            <a class="layui-btn search_btn">查询</a>
+            <div class="layui-tab-item">
+                <blockquote class="layui-elem-quote">
+                    <div class="layui-inline">
+                        <form action="{:url('index')}" class="layui-form" method="get">
+                            <div class="layui-input-inline">
+                                <input type="text" name="q" placeholder="插件名称/目录" class="layui-input layui-input-sm">
+                            </div>
+                            <button class="layui-btn layui-btn-sm" data-table="uninstalled-list" lay-submit lay-filter="search"><i class="layui-icon">&#xe615;</i>查询</button>
+                        </form>
+                    </div>
+                </blockquote>
+                <div class="layui-form">
+                    <table lay-data="{ url:'{:url("uninstalled")}', page:true, id:'uninstalled-list' }" class="layui-table" lay-even lay-filter="uninstalled-table">
+                        <thead>
+                        <tr>
+                            <th lay-data="{field:'id', width:50, sort: true}">ID</th>
+                            <th lay-data="{field:'title', minWidth:180, sort: true}">插件名称</th>
+                            <th lay-data="{field:'name', minWidth:180, sort: true}">插件目录</th>
+                            <th lay-data="{field:'version', width:90, sort: true}">版本号</th>
+                            <th lay-data="{field:'author', width:120, sort: true}">作者</th>
+                            <th lay-data="{width:90, templet: function(d){ return d.status ? '自定义' : '系统';}}">类型</th>
+                            <th lay-data="{width:100, maxWidth:150, align: 'center', toolbar: '#uninstalled-tools'}">操作</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
         </div>
-        <div class="layui-inline">
-            <a class="layui-btn layui-btn-normal newsAdd_btn">添加文章</a>
-        </div>
-        <div class="layui-inline">
-            <a class="layui-btn recommend" style="background-color:#5FB878">推荐文章</a>
-        </div>
-        <div class="layui-inline">
-            <a class="layui-btn audit_btn">审核文章</a>
-        </div>
-        <div class="layui-inline">
-            <a class="layui-btn layui-btn-danger batchDel">批量删除</a>
-        </div>
-        <div class="layui-inline">
-            <div class="layui-form-mid" style="color: red">注意：如果要后台管理插件请务必将 addons.php 中的 autoload 设置为 false</div>
-        </div>
-    </blockquote>
-    <div class="layui-form news_list">
-        <table class="layui-table">
-            <colgroup>
-                <col width="50">
-                <col>
-                <col width="9%">
-                <col width="9%">
-                <col width="9%">
-                <col width="9%">
-                <col width="9%">
-                <col width="15%">
-            </colgroup>
-            <thead>
-            <tr>
-                <th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose" id="allChoose"></th>
-                <th style="text-align:left;">文章标题</th>
-                <th>发布人</th>
-                <th>审核状态</th>
-                <th>浏览权限</th>
-                <th>是否展示</th>
-                <th>发布时间</th>
-                <th>操作</th>
-            </tr>
-            </thead>
-            <tbody class="news_content"></tbody>
-        </table>
     </div>
 </div>
+{/block}
+
+{block name="script"}
+<script type="text/html" id="installed-tools">
+    <div class="layui-btn-group">
+        {{# if(d.is_index){ }}
+        <a class="layui-btn layui-btn-xs layui-btn-primary" lay-event="visit">访问</a>
+        {{# } }}
+        {{# if(d.is_admin){ }}
+        <a class="layui-btn layui-btn-xs layui-btn-primary" lay-event="manager">管理</a>
+        {{# } }}
+        {{# if(d.setting.name){ }}
+        <a class="layui-btn layui-btn-xs layui-btn-primary" lay-event="setting">设置</a>
+        {{# } }}
+        {{# if(d.status == 1){ }}
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="uninstall">卸载</a>
+        {{# } }}
+    </div>
+</script>
+<script type="text/html" id="uninstalled-tools">
+    <div class="layui-btn-group">
+        <a class="layui-btn layui-btn-xs layui-btn-primary confirm" lay-event="install">安装</a>
+        {{# if(d.status != 0){ }}
+        <a class="layui-btn layui-btn-danger layui-btn-xs confirm" lay-event="delete">删除</a>
+        {{# } }}
+    </div>
+</script>
+<script type="text/javascript" src="__JS__/addons.js"></script>
 {/block}

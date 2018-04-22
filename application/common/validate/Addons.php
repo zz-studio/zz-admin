@@ -19,45 +19,19 @@
  * | Copyright (c) 2017 http://www.zzstudio.net All rights reserved.
  * +----------------------------------------------------------------------
  */
+namespace app\common\validate;
 
-namespace app\admin\controller;
+use think\Validate;
 
-use think\Controller;
-
-class Base extends Controller
+class Addons extends Validate
 {
-    // 分页变量
-    protected $page = 0;
-    protected $limit = 10;
+    protected $rule = [
+        'name|插件目录' => 'require|max:25|unique:addons',
+        'title|插件名称' => 'require|max:50',
+        'description|描述' => 'max:120',
+        'version|版本号' => 'require|max:10',
+        'author|作者' => 'require|max:20',
+    ];
 
-    /**
-     * 构造方法
-     * @access public
-     */
-    public function __construct()
-    {
-        parent::__construct();
-        $this->page = input('page', 0);
-        $this->limit = input('limit', 10);
-    }
-
-    /**
-     * 返回 table 所需格式
-     * @param array $list
-     * @return mixed
-     */
-    protected function toTable($list = [])
-    {
-        if (is_object($list)) {
-            $list = $list->toArray();
-        }
-
-        $data = [
-            'code' => 0,
-            'msg' => 'ok',
-            'count' => isset($list['total']) ? $list['total'] : count($list)
-        ];
-
-        return json(array_merge($data, $list));
-    }
+    protected $scene = [];
 }
