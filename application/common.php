@@ -31,9 +31,7 @@ Hook::add('app_init', function () {
     // 获取开关
     $autoload = (bool)Config::get('addons.autoload', false);
     // 配置自动加载时直接返回
-    if ($autoload) {
-        return;
-    }
+    if ($autoload) return;
     // 非正时表示后台接管插件业务
     // 当debug时不缓存配置
     $config = config('app_debug') ? [] : (array)cache('addons');

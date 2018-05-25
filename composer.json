@@ -18,7 +18,8 @@
     "require": {
         "php": ">=5.6.0",
         "topthink/framework": "5.1.*",
-        "zz-studio/think-addons": "dev-master"
+        "zz-studio/think-addons": "dev-master",
+        "zz-studio/think-wechat": "dev-master"
     },
     "autoload": {
         "psr-4": {
